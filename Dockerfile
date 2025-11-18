@@ -18,7 +18,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 FROM python:3.13-slim-bookworm
 
 RUN groupadd --system --gid 999 nonroot \
- && useradd --system --gid 999 --uid 999 --create-home nonroot
+    && useradd --system --gid 999 --uid 999 --create-home nonroot
 
 COPY --from=builder --chown=nonroot:nonroot /app /app
 
@@ -28,4 +28,4 @@ USER nonroot
 
 WORKDIR /app
 
-CMD [ "fastapi", "run", "--host", "0.0.0.0", "app" ]
+CMD [ "fastapi", "run", "--host", "0.0.0.0", "app/main.py" ]
